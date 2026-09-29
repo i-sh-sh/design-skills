@@ -1,9 +1,18 @@
 {
   "name": "design-director",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Art-direct and build distinctive UI for React/Next.js + Tailwind: audits, creative direction, design tokens, motion systems, modern CSS, creative/3D effects, full RTL/LTR support, and screenshot-based visual verification.",
   "author": {
     "name": "i-sh-sh"
   },
-  "keywords": ["design", "ui", "motion", "animation", "tailwind", "nextjs", "rtl", "design-system"]
+  "keywords": [
+    "design",
+    "ui",
+    "motion",
+    "animation",
+    "tailwind",
+    "nextjs",
+    "rtl",
+    "design-system"
+  ]
 }

@@ -38,7 +38,7 @@ Run these phases in order. Scale them to the request: a single component skips s
 
 ### 2. Direct — choose a point of view
 
-Read `references/creative-direction.md`. Extract the brief (audience, three brand adjectives, what the user should *feel*, competitors to differ from). Then propose **2–3 directions that genuinely differ** — different type pairing, palette logic, shape language, layout principle and motion signature — each with a named *signature element*. Present them compactly; if you can render, build a small specimen page and screenshot it rather than describing in prose. Let the user choose or mix. Skip this phase only when a direction/brand already exists — then honor it.
+Read `references/creative-direction.md` and `references/taste-profile.md` (the owner's recorded preferences — defaults when the brief leaves room, never overriding the project's own brand). Extract the brief (audience, three brand adjectives, what the user should *feel*, competitors to differ from). Then propose **2–3 directions that genuinely differ** — different type pairing, palette logic, shape language, layout principle and motion signature — each with a named *signature element*. Present them compactly; if you can render, build a small specimen page and screenshot it rather than describing in prose. Let the user choose or mix. Skip this phase only when a direction/brand already exists — then honor it.
 
 ### 3. Systematize — tokens before components
 
@@ -132,6 +132,7 @@ Load only what the current phase needs:
 |---|---|
 | `references/audit-rubric.md` | Phase 1, and again in phase 6 critique |
 | `references/creative-direction.md` | Phase 2, or when a design looks generic |
+| `references/taste-profile.md` | Phase 2 and effect choices — the owner's loved/rejected directions and effects |
 | `references/design-system.md` | Phase 3; any token, color, type, spacing, dark-mode work |
 | `references/motion.md` | Phase 4; any animation, transition, micro-interaction |
 | `references/modern-css.md` | Choosing a platform feature; checking fallbacks |
