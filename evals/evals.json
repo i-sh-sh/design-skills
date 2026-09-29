@@ -1,0 +1,26 @@
+{
+  "skill_name": "design-director",
+  "evals": [
+    {
+      "id": 1,
+      "name": "showcase-landing-redesign",
+      "prompt": "יש לי דף נחיתה ב-Next.js 16 עם Tailwind v4 (app/page.tsx) למוצר SaaS לניהול צוותים. הוא נראה גנרי לגמרי — hero ממורכז עם גרדיאנט סגול ו-3 כרטיסי פיצ'רים. האתר בעברית ובאנגלית (/he ו-/en). תשדרג אותו שייראה פרימיום ויהיה בו רגע וואו אחד, בלי להרוג ביצועים.",
+      "expected_output": "Audit of current page, 2-3 distinct creative directions (or one confident direction with reasoning), token layer in OKLCH, a signature element, one showcase motion moment with reduced-motion handling, logical properties only, LCP element visible at first paint, screenshots reviewed in both directions.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "product-dashboard-motion",
+      "prompt": "Our settings dashboard (React 19 + Tailwind + shadcn/ui) feels dead — tabs just snap, the sidebar collapses instantly, toasts pop in. Add motion that makes it feel polished but not slow. The app ships in Hebrew and English, dir is set on <html>.",
+      "expected_output": "Product-mode motion: ≤250ms, springs with no/low bounce, shared layoutId tab indicator, direction-aware sidebar/drawer using a dir sign, exits faster than entrances, MotionConfig reducedMotion=user, no scroll reveals on app content.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "design-system-from-scratch",
+      "prompt": "מתחיל פרויקט חדש (Next + Tailwind 4 + shadcn). תבנה לי design system בסיסי: צבעים, טיפוגרפיה לעברית ואנגלית, dark mode אמיתי ולא הפוך, ומערכת תנועה. המותג: מדויק, רגוע, בטוח בעצמו — לא שובב.",
+      "expected_output": "globals.css with primitive + semantic OKLCH tokens, designed dark mode, Hebrew+Latin font pairing with next/font setup, fluid type scale with Hebrew tracking/leading overrides, motion tokens in CSS and TS, contrast check output for both themes.",
+      "files": []
+    }
+  ]
+}

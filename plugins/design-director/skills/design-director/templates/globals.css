@@ -1,0 +1,244 @@
+/*
+ * design-director — Tailwind v4 token layer (starting point)
+ *
+ * The palette below is a neutral placeholder (cool neutrals + cobalt accent).
+ * Replace primitives with the chosen creative direction; keep the semantic
+ * names — shadcn/ui components depend on them.
+ *
+ * Fonts: expose next/font variables as --font-latin, --font-hebrew,
+ * --font-display-latin, --font-display-hebrew, --font-mono-src on <html>
+ * (e.g. next/font `variable: "--font-latin"`). Missing ones fall back to
+ * the system stack.
+ */
+
+@import "tailwindcss";
+@import "./motion.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ───────────────────────── Primitives ───────────────────────── */
+:root {
+  /* Neutral ramp — hue 255, trace of chroma so grays aren't dead */
+  --neutral-0: oklch(1 0 0);
+  --neutral-50: oklch(0.985 0.003 255);
+  --neutral-100: oklch(0.965 0.005 255);
+  --neutral-200: oklch(0.92 0.007 255);
+  --neutral-300: oklch(0.86 0.009 255);
+  --neutral-400: oklch(0.71 0.012 255);
+  --neutral-500: oklch(0.55 0.014 255);
+  --neutral-600: oklch(0.45 0.014 255);
+  --neutral-700: oklch(0.37 0.013 255);
+  --neutral-800: oklch(0.27 0.012 255);
+  --neutral-850: oklch(0.225 0.011 255);
+  --neutral-900: oklch(0.19 0.01 255);
+  --neutral-950: oklch(0.155 0.009 255);
+
+  /* Accent ramp — chroma peaks mid-ramp */
+  --accent-100: oklch(0.95 0.022 262);
+  --accent-300: oklch(0.84 0.07 262);
+  --accent-400: oklch(0.76 0.12 262);
+  --accent-500: oklch(0.56 0.19 262);
+  --accent-600: oklch(0.5 0.19 262);
+
+  --red-500: oklch(0.58 0.2 25);
+  --red-400: oklch(0.74 0.14 25);
+  --green-500: oklch(0.6 0.14 150);
+  --amber-500: oklch(0.75 0.15 75);
+}
+
+/* ───────────────────────── Semantic: light ───────────────────────── */
+:root {
+  color-scheme: light;
+
+  --background: var(--neutral-50);
+  --foreground: var(--neutral-950);
+  --card: var(--neutral-0);
+  --card-foreground: var(--neutral-950);
+  --popover: var(--neutral-0);
+  --popover-foreground: var(--neutral-950);
+  --surface-1: var(--neutral-0);
+  --surface-2: var(--neutral-100);
+  --surface-3: var(--neutral-200);
+
+  --primary: var(--accent-500);
+  --primary-foreground: var(--neutral-0);
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--neutral-900);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-600);
+  --accent: var(--accent-100);
+  --accent-foreground: var(--accent-600);
+  --destructive: var(--red-500);
+  --destructive-foreground: var(--neutral-0);
+  --success: var(--green-500);
+  --warning: var(--amber-500);
+
+  --border: var(--neutral-200);
+  --input: var(--neutral-300);
+  --ring: var(--accent-500);
+
+  --radius: 0.5rem;
+
+  --shadow-color: 255 30% 20%;
+}
+
+/* ───────────────────────── Semantic: dark ─────────────────────────
+ * Designed, not inverted: tinted near-black base, surfaces get lighter as
+ * they rise, accent lifted in lightness and slightly lower in chroma. */
+.dark {
+  color-scheme: dark;
+
+  --background: var(--neutral-950);
+  --foreground: oklch(0.96 0.004 255);
+  --card: var(--neutral-900);
+  --card-foreground: oklch(0.96 0.004 255);
+  --popover: var(--neutral-850);
+  --popover-foreground: oklch(0.96 0.004 255);
+  --surface-1: var(--neutral-900);
+  --surface-2: var(--neutral-850);
+  --surface-3: var(--neutral-800);
+
+  --primary: var(--accent-400);
+  --primary-foreground: var(--neutral-950);
+  --secondary: var(--neutral-850);
+  --secondary-foreground: oklch(0.96 0.004 255);
+  --muted: var(--neutral-850);
+  --muted-foreground: oklch(0.78 0.012 255);
+  --accent: oklch(0.3 0.06 262);
+  --accent-foreground: var(--accent-300);
+  --destructive: var(--red-400);
+  --destructive-foreground: var(--neutral-950);
+
+  --border: oklch(1 0 0 / 0.09);
+  --input: oklch(1 0 0 / 0.14);
+  --ring: var(--accent-400);
+}
+
+/* ───────────────────────── Direction & language ───────────────────────── */
+:root {
+  --dir-sign: 1;
+  --tracking-display: -0.035em;
+  --tracking-heading: -0.02em;
+  --tracking-label: 0.06em;
+  --leading-display: 1;
+  --leading-heading: 1.15;
+}
+[dir="rtl"] {
+  --dir-sign: -1;
+}
+/* Hebrew: no case, no tracking; a bit more leading */
+:lang(he) {
+  --tracking-display: 0;
+  --tracking-heading: 0;
+  --tracking-label: 0;
+  --leading-display: 1.08;
+  --leading-heading: 1.25;
+}
+
+/* ───────────────────────── Tailwind theme ─────────────────────────
+ * `inline` makes utilities reference the variables directly, so .dark and
+ * :lang(he) overrides apply wherever they're set. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Latin first, Hebrew second: per-glyph fallback handles mixed text */
+  --font-sans: var(--font-latin, ui-sans-serif), var(--font-hebrew, ui-sans-serif), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-latin, var(--font-latin, ui-sans-serif)), var(--font-display-hebrew, var(--font-hebrew, ui-sans-serif)), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-src, ui-monospace), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  /* Fluid type — 360px → 1440px viewport. Body sizes stay fixed for zoom. */
+  --text-display: clamp(2.75rem, 1.667rem + 4.815vw, 6rem);
+  --text-display--line-height: var(--leading-display);
+  --text-display--letter-spacing: var(--tracking-display);
+  --text-h1: clamp(2.125rem, 1.583rem + 2.407vw, 3.75rem);
+  --text-h1--line-height: var(--leading-heading);
+  --text-h1--letter-spacing: var(--tracking-heading);
+  --text-h2: clamp(1.75rem, 1.458rem + 1.296vw, 2.625rem);
+  --text-h2--line-height: var(--leading-heading);
+  --text-h2--letter-spacing: var(--tracking-heading);
+  --text-h3: clamp(1.375rem, 1.25rem + 0.556vw, 1.75rem);
+  --text-h3--line-height: 1.3;
+  --text-lead: clamp(1.125rem, 1.042rem + 0.37vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: var(--tracking-label);
+
+  --shadow-xs: 0 1px 2px hsl(var(--shadow-color) / 0.06);
+  --shadow-sm: 0 1px 2px hsl(var(--shadow-color) / 0.06), 0 2px 6px -1px hsl(var(--shadow-color) / 0.06);
+  --shadow-md: 0 1px 2px hsl(var(--shadow-color) / 0.06), 0 6px 16px -4px hsl(var(--shadow-color) / 0.1);
+  --shadow-lg: 0 2px 4px hsl(var(--shadow-color) / 0.05), 0 16px 40px -8px hsl(var(--shadow-color) / 0.16);
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scrollbar-gutter: stable;
+    accent-color: var(--primary);
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.6;
+  }
+  :lang(he) body,
+  body:lang(he) {
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p, li, blockquote {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--primary) 24%, transparent);
+  }
+  table, [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Mirror directional icons: <ArrowRight className="icon-directional" /> */
+@utility icon-directional {
+  &:dir(rtl) {
+    scale: -1 1;
+  }
+}

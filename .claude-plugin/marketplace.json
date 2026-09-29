@@ -1,0 +1,19 @@
+{
+  "name": "design-skills",
+  "owner": {
+    "name": "i-sh-sh"
+  },
+  "metadata": {
+    "description": "Design, motion and creative-direction skills for Claude Code",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "design-director",
+      "source": "./plugins/design-director",
+      "description": "Art-direct and build distinctive UI for React/Next.js + Tailwind: audits, creative direction, design tokens, motion systems, modern CSS, creative/3D effects, full RTL/LTR support, and screenshot-based visual verification.",
+      "version": "0.1.0",
+      "category": "design"
+    }
+  ]
+}
