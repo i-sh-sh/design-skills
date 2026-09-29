@@ -40,6 +40,31 @@ plugins/design-director/skills/design-director/
     └── motion.ts               presets ל-Motion for React, מודע לכיוון
 ```
 
+## design-council
+
+מועצת עיצוב שבוחנת פרויקט במצבו הנוכחי ומחליטה לאן הוא הולך מבחינת עיצוב וחוויה: מה מתאים לשלב הזה, שלושת הצעדים הבאים, ומה במפורש לא עושים עכשיו.
+
+| | |
+|---|---|
+| **חברים** | יו"ר (ראש עיצוב), מנהל קריאייטיב, חוקר חוויית משתמש, מעצב מוצר ואינטראקציה, מוביל design system, מוביל עיצוב מכליל (נגישות, ביצועים, RTL/LTR, עם זכות וטו), מהנדס עיצוב, פרקליט השטן |
+| **מצבים** | **מהיר**: דיון אחד עם כל הקולות. **מלא**: כל חבר כסוכן נפרד, בלי לראות את האחרים, ואחריו סבב ביקורת והכרעה |
+| **שלבי פרויקט** | רעיון, אב-טיפוס, MVP, צמיחה, בוגר, עיצוב מחדש. לכל שלב מוגדר מה משקיעים ומה נמנעים |
+| **תוצר** | `.council/DIRECTION.md` (הכיוון החי) ו-`.council/decisions/NNNN-*.md` (יומן החלטות עם דעות מיעוט ותנאים לדיון חוזר) |
+| **הפעלה** | `/council [שאלה] [--quick\|--full]`, או שאלות כיוון כמו "לאן להמשיך?" או "כדאי לעשות X עכשיו?" |
+
+`design-director` קורא את `.council/DIRECTION.md` ומכבד החלטות שהתקבלו.
+
+```
+plugins/design-council/
+├── commands/council.md             הפקודה /council
+└── skills/design-council/
+    ├── SKILL.md                    תהליך הכינוס
+    ├── members/                    8 חברים: מנדט, שאלות, ראיות, הטיה מוכרת
+    ├── references/                 שלבים, תיק מצב, פרוטוקול דיון, פורמט החלטות
+    ├── templates/                  הערכה, חקירה נגדית, רשומת החלטה, DIRECTION.md
+    └── scripts/dossier.mjs         סריקה אוטומטית של הפרויקט והצעת שלב
+```
+
 ## התקנה
 
 ### בכל פרויקט, אוטומטית (מומלץ)
@@ -54,7 +79,8 @@ plugins/design-director/skills/design-director/
     }
   },
   "enabledPlugins": {
-    "design-director@design-skills": true
+    "design-director@design-skills": true,
+    "design-council@design-skills": true
   }
 }
 ```
@@ -64,6 +90,7 @@ plugins/design-director/skills/design-director/
 ```
 /plugin marketplace add i-sh-sh/design-skills
 /plugin install design-director@design-skills
+/plugin install design-council@design-skills
 ```
 
 עדכון: `/plugin marketplace update design-skills`.

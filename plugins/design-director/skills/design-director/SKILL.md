@@ -32,13 +32,14 @@ Run these phases in order. Scale them to the request: a single component skips s
 
 ### 1. Discover — understand what exists
 
+- If `.council/DIRECTION.md` exists (written by the design-council skill), read it first. Accepted decisions there are binding: follow their direction, principles and not-now list, and don't reopen them. If the task conflicts with an accepted decision, or raises a direction-level question the file doesn't answer, say so and suggest convening the council (`/council`).
 - Detect the stack: `package.json` (Next version, React version, Tailwind v3 vs v4, `motion`/`framer-motion`, `gsap`, `@react-three/fiber`, shadcn/ui via `components.json`), the global CSS file, `tailwind.config.*` or `@theme` blocks, font setup, `dir`/`lang` handling and i18n routing.
 - If the app runs, capture it — don't audit from code alone. Use `scripts/capture.mjs` (see *Visual verification*). Look at the screenshots yourself, critically, as an art director would.
 - Score against `references/audit-rubric.md` and write the gap report in the format given there. For a small task, keep this to a few lines.
 
 ### 2. Direct — choose a point of view
 
-Read `references/creative-direction.md` and `references/taste-profile.md` (the owner's recorded preferences — defaults when the brief leaves room, never overriding the project's own brand). Extract the brief (audience, three brand adjectives, what the user should *feel*, competitors to differ from). Then propose **2–3 directions that genuinely differ** — different type pairing, palette logic, shape language, layout principle and motion signature — each with a named *signature element*. Present them compactly; if you can render, build a small specimen page and screenshot it rather than describing in prose. Let the user choose or mix. Skip this phase only when a direction/brand already exists — then honor it.
+Read `references/creative-direction.md` and `references/taste-profile.md` (the owner's recorded preferences — defaults when the brief leaves room, never overriding the project's own brand). Extract the brief (audience, three brand adjectives, what the user should *feel*, competitors to differ from). Then propose **2–3 directions that genuinely differ** — different type pairing, palette logic, shape language, layout principle and motion signature — each with a named *signature element*. Present them compactly; if you can render, build a small specimen page and screenshot it rather than describing in prose. Let the user choose or mix. Skip this phase when a direction/brand already exists — including an accepted council direction in `.council/DIRECTION.md` — and honor it.
 
 ### 3. Systematize — tokens before components
 

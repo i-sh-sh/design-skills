@@ -1,0 +1,9 @@
+{
+  "name": "design-council",
+  "version": "0.1.0",
+  "description": "A council of design experts that examines a project's current state and decides its design & experience direction: what fits this stage, the next three moves, and what not to do now. Decisions are recorded in the repo.",
+  "author": {
+    "name": "i-sh-sh"
+  },
+  "keywords": ["design", "ux", "strategy", "direction", "council", "decision-records"]
+}

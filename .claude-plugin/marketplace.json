@@ -4,15 +4,22 @@
     "name": "i-sh-sh"
   },
   "metadata": {
-    "description": "Design, motion and creative-direction skills for Claude Code",
-    "version": "0.2.0"
+    "description": "Design, motion, creative-direction and design-council skills for Claude Code",
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "design-director",
       "source": "./plugins/design-director",
       "description": "Art-direct and build distinctive UI for React/Next.js + Tailwind: audits, creative direction, design tokens, motion systems, modern CSS, creative/3D effects, full RTL/LTR support, and screenshot-based visual verification.",
-      "version": "0.2.0",
+      "version": "0.2.1",
+      "category": "design"
+    },
+    {
+      "name": "design-council",
+      "source": "./plugins/design-council",
+      "description": "A council of design experts that examines a project's current state and decides its design & experience direction: what fits this stage, the next three moves, and what not to do now. Decisions are recorded in the repo.",
+      "version": "0.1.0",
       "category": "design"
     }
   ]
