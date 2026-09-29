@@ -23,6 +23,8 @@ A menu of "wow" techniques, each with its cost, its risk, and how to do it well.
 
 Split the headline and animate the pieces. For bidirectional text, **split by words** by default: word order and bidi reordering stay correct, and Hebrew/English mixed lines don't scramble.
 
+- **Split words are atomic inlines, and atomic inlines are neutral to the bidi algorithm.** If each word becomes its own `inline-block`, a run of English words inside a Hebrew sentence (or Hebrew inside English) displays in *reverse order* ("Design System" → "System Design"). Group each opposite-direction run into a single unit with its own `dir`, and keep trailing punctuation outside that unit so it lands on the correct side. Verify with a screenshot in both directions.
+- Don't split inside a word to style part of it: Hebrew prefixes (ש, ה, ו, ב, ל, מ, כ) attach to the next word, and a split there introduces a visible gap. Put the whole word, prefix included, in the emphasized span.
 - Splitting by characters is fine for pure Latin or pure Hebrew (Hebrew letters don't join, unlike Arabic — **never split Arabic by character**). Keep niqqud (vowel marks) attached to their letter: split by grapheme with `Intl.Segmenter`, not by code unit.
 - GSAP `SplitText` (free since 3.13) handles lines/words/chars, masks for clipped reveals (`mask: "lines"`), and re-splits on resize (`autoSplit`). Always keep an accessible label: the original text in `aria-label` on the container and `aria-hidden` on the split spans (SplitText does this by default in recent versions — verify).
 - A pure-CSS version: wrap words in spans with `style="--i: n"` and use `animation-delay: calc(var(--i) * 40ms)`.

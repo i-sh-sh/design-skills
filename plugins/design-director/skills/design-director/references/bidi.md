@@ -109,6 +109,9 @@ The Unicode bidi algorithm handles most mixing, but boundaries between direction
 - **Interpolated strings:** `"{count} פריטים"` — wrap interpolated values in `<bdi>` in components that render translated strings with variables.
 - **Truncation:** `text-overflow: ellipsis` follows direction; for mixed content in one line, isolate each segment.
 - **Icons adjacent to text:** use flex with `gap`, not margins, so the icon lands on the right side automatically.
+- **Per-word wrappers break mixed runs.** `inline-block`/`inline-flex` elements are treated as neutral characters by the bidi algorithm, so wrapping each word separately (for kinetic type, highlights, tooltips per word) reverses the order of an opposite-direction run. Wrap the whole run in one element with `dir`, or keep the words as plain inline text.
+- **Mono and Latin-only faces need a Hebrew fallback in the stack** (`"IBM Plex Mono", "Heebo", monospace`). Otherwise Hebrew labels set in the mono face fall back to a system monospace with wide, uneven spacing.
+- **Hebrew prefixes** (ש, ה, ו, ב, ל, מ, כ) belong to the next word. Never put an element boundary between a prefix and its word; emphasize the whole word.
 
 ## 6. Motion and interaction in both directions
 
