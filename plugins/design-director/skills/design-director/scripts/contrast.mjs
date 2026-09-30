@@ -11,6 +11,7 @@ contrast.mjs — check color pairs
               node contrast.mjs "oklch(0.55 0.2 260)" "#fff"
 
   From CSS:   node contrast.mjs --css app/globals.css --pairs "foreground/background,muted-foreground/background"
+              --css accepts several comma-separated files (e.g. "src/styles/brand.css,src/app/globals.css").
               Reads custom properties (--name: value) from light (:root, @theme) and dark (.dark,
               [data-theme=dark], prefers-color-scheme: dark) blocks, resolves var() chains, and
               checks each pair in both themes.
@@ -232,7 +233,9 @@ function main() {
   let limited = 0;
 
   if (cssPath) {
-    const { light, dark } = extractBlocks(readFileSync(cssPath, "utf8"));
+    // Several files may be given comma-separated (e.g. brand primitives + semantic layer).
+    const css = cssPath.split(",").map((f) => readFileSync(f.trim(), "utf8")).join("\n");
+    const { light, dark } = extractBlocks(css);
     const darkVars = { ...light, ...dark };
     const pairs = (get("--pairs")?.split(",") ?? DEFAULT_PAIRS).map((p) => p.trim()).filter(Boolean);
     for (const [themeName, vars, has] of [["light", light, true], ["dark", darkVars, Object.keys(dark).length > 0]]) {

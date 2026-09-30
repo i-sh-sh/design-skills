@@ -56,6 +56,8 @@ export default async function RootLayout({ children, params }: { children: React
 
 Implementation: `rtl:-scale-x-100` on directional icons, or a `DirectionalIcon` wrapper that applies it. Keep the list of which icons are directional in one place.
 
+**Author directional icons in their LTR meaning** — `ArrowRight`/`ChevronRight` for "forward/next", `ArrowLeft` for "back" — and let the mirroring flip them in RTL. Picking `ArrowLeft` because "forward is left in Hebrew" *and* adding the mirror class double-flips it to point backwards. It's an easy mistake that only a screenshot catches.
+
 ## 4. Typography for Hebrew + Latin
 
 **Font stack technique.** Put the Latin face first and the Hebrew face second: Latin fonts usually don't contain Hebrew glyphs, so the browser falls back per character to the Hebrew face. One `font-family` then handles mixed text correctly:
