@@ -83,6 +83,7 @@ If accepted moves include design work, list them as tasks for the design-directo
 ## Re-convening
 
 - Read past decisions first. Don't re-open an accepted decision unless one of its revisit triggers fired, new evidence contradicts it, or the user asks. When a new ruling replaces an old one, mark the old one `superseded by NNNN`.
+- When the user answers a **proposed** decision's open questions and the answers fire its revisit triggers or overturn its assumptions, don't ask them to accept the stale ruling: re-rule in quick mode on the narrow question "what changes given this new evidence?", record it as a new decision that supersedes the proposed one, and ask for acceptance of the new one. Dissent from the earlier ruling that the new evidence vindicates should be named as such in the "Why".
 - Suggest re-convening when a revisit trigger has clearly fired (a launch happened, the audience changed, a stage signal moved) — suggest, don't convene unasked.
 
 ## Principles the council holds
