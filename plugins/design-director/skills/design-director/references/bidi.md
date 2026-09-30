@@ -107,7 +107,7 @@ The Unicode bidi algorithm handles most mixing, but boundaries between direction
 
 - **User-generated or unknown-direction text** (names, titles, comments, search results): `dir="auto"` on its container, or `<bdi>` for inline values.
 - **Always-LTR content** inside RTL: code, file paths, URLs, emails, phone numbers, product SKUs, math — `dir="ltr"` (inline: `<span dir="ltr">`), plus `unicode-bidi: isolate` (implied by `dir`).
-- **Inputs:** `dir="auto"` for free text; `dir="ltr"` for email/URL/phone/number inputs, with `text-align: end` in RTL forms if it looks detached from the label (decide by screenshot).
+- **Inputs:** don't put `dir="auto"` on text inputs and textareas. On an **empty** field it resolves to LTR, so in an RTL form the placeholder and caret sit on the wrong side and a mixed placeholder ("למשל: מפתח/ת Frontend") displays scrambled. Let the field inherit the page direction and add `unicode-bidi: plaintext` (Tailwind `[unicode-bidi:plaintext]`): each typed value then takes its direction from its first strong character, while the empty field stays RTL. Use `dir="ltr"` for email/URL/phone/number inputs, with `text-align: end` in RTL forms if it looks detached from the label (decide by screenshot). `dir="auto"` is still right for *displayed* user content (names, comments) that is never empty.
 - **Interpolated strings:** `"{count} פריטים"` — wrap interpolated values in `<bdi>` in components that render translated strings with variables.
 - **Truncation:** `text-overflow: ellipsis` follows direction; for mixed content in one line, isolate each segment.
 - **Icons adjacent to text:** use flex with `gap`, not margins, so the icon lands on the right side automatically.
