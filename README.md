@@ -4,7 +4,7 @@ Claude Code plugin marketplace עם סקילים לעיצוב, תנועה וכי
 
 ## design-director
 
-סקיל שלוקח כל פרויקט React / Next.js + Tailwind לשלב הבא:
+סקיל עיצוב **אישי שמשתפר מפרויקט לפרויקט**. הוא לוקח כל פרויקט React / Next.js + Tailwind לשלב הבא:
 
 | שלב | מה קורה |
 |---|---|
@@ -13,7 +13,22 @@ Claude Code plugin marketplace עם סקילים לעיצוב, תנועה וכי
 | **3. מערכת** | טוקנים ב-OKLCH, טיפוגרפיה נזילה, מצב כהה מעוצב, בדיקת ניגודיות אוטומטית (WCAG + APCA) |
 | **4. תנועה** | מערכת תנועה: משכים, easing, springs, כוריאוגרפיה — מצב **מוצר** (פונקציונלי) ומצב **שיווקי** (אקספרסיבי) |
 | **5. מימוש** | קוד אמיתי: CSS מודרני, Motion, GSAP, View Transitions, R3F — הכלי הקל ביותר שעושה את העבודה |
-| **6. אימות** | צילום → ביקורת → תיקון, כולל filmstrip לאנימציות ו-scroll-through, נגישות וביצועים |
+| **0. זיכרון** | לפני שמתחילים: הטעם שלך, סגנון העבודה שלך, הלקחים מהפרויקט הקודם, והתקנת שומרי האיכות |
+| **6. אימות** | צילום → ביקורת → תיקון, כולל filmstrip לאנימציות, scroll-through, בדיקת זרימות, נגישות וביצועים |
+| **7. רטרוספקטיבה** | דף דירוג של מה שנבנה, ומה שהסקיל מסיק מהשיחה. הלקחים הופכים לשינויים בסקיל, ב-PR שאתה מאשר |
+
+### איך הסקיל משתפר
+
+| מה מצטבר | איפה | מה זה נותן בפרויקט הבא |
+|---|---|---|
+| **הטעם שלך** | `owner/taste-profile.md` | הצעות שמתאימות לך כבר מהפעם הראשונה. לכל העדפה יש משקל מ-3− עד 3+ ומקור |
+| **סגנון העבודה שלך** | `owner/working-style.md` | עבודה בדרך שמתאימה לך: קודם הגדרה, ואז דוגמאות חיות לדירוג. כולל מגבלות ידועות של הסביבה |
+| **סולם המלכודות** | `references/pitfalls.md` | כל לקח מטפס בסולם: הערה, כלל, בדיקה אוטומטית, רכיב מוכן. טעות שקרתה פעם אחת לא חוזרת |
+| **ספריית רכיבים** | `patterns/` | רכיבים שאהבת, מוכנים לשימוש ומתוקנים מראש |
+| **יומן ומדדים** | `owner/projects.md` | בעיות בגרסה הראשונה, כמה נתפסו בבדיקה ולא בעין, סבבי תיקון. כך רואים אם האיכות באמת עולה |
+| **כיול המועצה** | `design-council/learning/calibration.md` | הכרעות שקרובות יותר למה שאתה מאשר |
+
+פקודות: `/design-retro` מריץ רטרוספקטיבה, ו-`/design-kit` מתקין בפרויקט חדש את ה-lint ל-RTL, את בדיקת הניגודיות, את ה-CI ואת `vercel.json`.
 
 עברית ואנגלית שוות ערך: logical properties בלבד, אנימציות שמתהפכות לפי כיוון, זוגות גופנים עבריים-לטיניים, ובדיקה בשני הכיוונים.
 
@@ -30,14 +45,22 @@ plugins/design-director/skills/design-director/
 │   ├── modern-css.md           קטלוג פיצ'רים עם רמות תמיכה ו-fallbacks
 │   ├── creative-tech.md        kinetic type, scroll stories, shaders, 3D, SVG
 │   ├── bidi.md                 RTL ⇄ LTR: layout, גופנים, תוכן מעורב, תנועה
-│   └── a11y-performance.md     WCAG 2.2, Core Web Vitals, תקציב אפקטים
+│   ├── a11y-performance.md     WCAG 2.2, Core Web Vitals, תקציב אפקטים
+│   ├── pitfalls.md             סולם המלכודות: הערה, כלל, בדיקה, רכיב
+│   └── retrospective.md        תהליך השיפור העצמי
+├── owner/                      הטעם שלך, סגנון העבודה שלך, ויומן הפרויקטים
+├── patterns/                   רכיבים מוכנים: UI kit, טאבים, כפתור עם מצבים, התראות, מגירה, מעברים
+├── kit/                        שומרי איכות לכל פרויקט (install-kit.mjs, check-logical.mjs)
 ├── scripts/
-│   ├── capture.mjs             צילומי מסך / filmstrip / scroll-through (Playwright)
-│   └── contrast.mjs            בדיקת ניגודיות WCAG + APCA ישירות מקובץ CSS
+│   ├── capture.mjs             צילומי מסך / filmstrip / scroll-through (PNG או JPEG)
+│   ├── contrast.mjs            בדיקת ניגודיות WCAG + APCA מקובץ CSS אחד או יותר
+│   ├── retro.mjs               איסוף עובדות לרטרוספקטיבה
+│   └── build-rating-page.mjs   בניית דף הדירוג מצילומי המסך
 └── templates/
     ├── globals.css             שכבת טוקנים ל-Tailwind v4 (תואם shadcn/ui)
     ├── motion.css              טוקני תנועה, view transitions, scroll reveal, reduced motion
-    └── motion.ts               presets ל-Motion for React, מודע לכיוון
+    ├── motion.ts               presets ל-Motion for React, מודע לכיוון
+    └── rating-page.html        תבנית דף הדירוג
 ```
 
 ## design-council

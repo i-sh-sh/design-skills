@@ -29,6 +29,8 @@ capture.mjs — screenshots for visual review
   --wait <ms>               Extra settle time after load (default: 600)
   --wait-for <selector>     Wait for this selector before capturing
   --selector <selector>     Screenshot only this element
+  --format <png|jpeg>       Image format (default: png). jpeg is ~5x smaller — use it for rating pages
+  --quality <1-100>         JPEG quality (default: 72)
 
   Motion review:
   --filmstrip <n>           Capture n frames instead of one still
@@ -117,6 +119,9 @@ async function main() {
   const frames = Number(args.filmstrip || 0);
   const interval = Number(args.interval || 80);
   const scrollSteps = Number(args["scroll-steps"] || 0);
+  const jpeg = args.format === "jpeg" || args.format === "jpg";
+  const ext = jpeg ? "jpg" : "png";
+  const img = jpeg ? { type: "jpeg", quality: Number(args.quality || 72) } : { type: "png" };
 
   let browser;
   try {
@@ -174,8 +179,8 @@ async function main() {
             await page.goto(url, { waitUntil: "commit" });
             await page.waitForLoadState("domcontentloaded");
             for (let f = 0; f < frames; f++) {
-              const file = path.join(out, `${tag}-load-${String(f).padStart(2, "0")}.png`);
-              await target().screenshot({ path: file, animations: "allow" });
+              const file = path.join(out, `${tag}-load-${String(f).padStart(2, "0")}.${ext}`);
+              await target().screenshot({ path: file, animations: "allow", ...img });
               written.push(file);
               await sleep(interval);
             }
@@ -191,8 +196,8 @@ async function main() {
               if (args.click) await trigger.click();
               else await trigger.hover();
               for (let f = 0; f < frames; f++) {
-                const file = path.join(out, `${tag}-${args.click ? "click" : "hover"}-${String(f).padStart(2, "0")}.png`);
-                await target().screenshot({ path: file, animations: "allow" });
+                const file = path.join(out, `${tag}-${args.click ? "click" : "hover"}-${String(f).padStart(2, "0")}.${ext}`);
+                await target().screenshot({ path: file, animations: "allow", ...img });
                 written.push(file);
                 await sleep(interval);
               }
@@ -202,13 +207,13 @@ async function main() {
                 const y = Math.round((max * s) / Math.max(1, scrollSteps - 1));
                 await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), y);
                 await sleep(Math.max(250, interval));
-                const file = path.join(out, `${tag}-scroll-${String(s).padStart(2, "0")}.png`);
-                await page.screenshot({ path: file, animations: "allow" });
+                const file = path.join(out, `${tag}-scroll-${String(s).padStart(2, "0")}.${ext}`);
+                await page.screenshot({ path: file, animations: "allow", ...img });
                 written.push(file);
               }
             } else {
-              const file = path.join(out, `${tag}.png`);
-              await target().screenshot({ path: file, ...shotOpts });
+              const file = path.join(out, `${tag}.${ext}`);
+              await target().screenshot({ path: file, ...shotOpts, ...img });
               written.push(file);
             }
           }

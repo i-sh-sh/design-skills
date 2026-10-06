@@ -1,0 +1,151 @@
+/*
+ * design-director patterns — motion utilities used by patterns/*.tsx.
+ * Import after tailwindcss and templates/motion.css (needs --duration-*, --ease-*,
+ * --motion-distance and --dir-sign):  @import "./patterns.css";
+ *
+ * Contents: directional page transitions (React <ViewTransition>), card→page morph,
+ * anchored header/bottom nav, drawer/sheet + overlay motion (Radix data-state),
+ * CSS-spring toasts, collapsing list rows.
+ */
+
+/* ───────── View transitions (React <ViewTransition>, Next 16) ─────────
+ * Directional navigation follows reading direction: in RTL "forward" moves
+ * content toward the left, so offsets are multiplied by --dir-sign. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-old(.nav-forward) {
+  --slide-offset: calc(-48px * var(--dir-sign) * var(--motion-distance));
+  animation:
+    var(--duration-fast) var(--ease-exit) both vt-fade reverse,
+    var(--duration-slow) var(--ease-standard) both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: calc(48px * var(--dir-sign) * var(--motion-distance));
+  animation:
+    var(--duration-base) var(--ease-enter) var(--duration-fast) both vt-fade,
+    var(--duration-slow) var(--ease-standard) both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: calc(48px * var(--dir-sign) * var(--motion-distance));
+  animation:
+    var(--duration-fast) var(--ease-exit) both vt-fade reverse,
+    var(--duration-slow) var(--ease-standard) both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: calc(-48px * var(--dir-sign) * var(--motion-distance));
+  animation:
+    var(--duration-base) var(--ease-enter) var(--duration-fast) both vt-fade,
+    var(--duration-slow) var(--ease-standard) both vt-slide;
+}
+/* Card → project page morph */
+::view-transition-group(.morph) {
+  animation-duration: 380ms;
+  animation-timing-function: var(--ease-standard);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-soften;
+}
+/* Header and bottom nav stay put during slides */
+::view-transition-group(site-header),
+::view-transition-group(bottom-nav) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header),
+::view-transition-old(bottom-nav) {
+  display: none;
+}
+::view-transition-new(site-header),
+::view-transition-new(bottom-nav) {
+  animation: none;
+}
+@keyframes vt-fade {
+  from { opacity: 0; }
+}
+@keyframes vt-slide {
+  from { translate: var(--slide-offset) 0; }
+  to { translate: 0 0; }
+}
+@keyframes vt-soften {
+  40% { filter: blur(2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* ───────── Drawer / sheet (Radix Dialog data-state) ───────── */
+@keyframes overlay-in { from { opacity: 0; } }
+@keyframes overlay-out { to { opacity: 0; } }
+/* Anchored to the inline-end edge: off-screen = further toward that edge */
+@keyframes drawer-in {
+  from { translate: calc(100% * var(--dir-sign) * var(--motion-distance)) 0; opacity: calc(1 - var(--motion-distance)); }
+}
+@keyframes drawer-out {
+  to { translate: calc(100% * var(--dir-sign) * var(--motion-distance)) 0; opacity: calc(1 - var(--motion-distance)); }
+}
+@keyframes sheet-in {
+  from { translate: 0 calc(100% * var(--motion-distance)); opacity: calc(1 - var(--motion-distance)); }
+}
+@keyframes sheet-out {
+  to { translate: 0 calc(100% * var(--motion-distance)); opacity: calc(1 - var(--motion-distance)); }
+}
+@utility overlay-motion {
+  &[data-state="open"] { animation: overlay-in var(--duration-base) var(--ease-standard); }
+  &[data-state="closed"] { animation: overlay-out var(--duration-fast) var(--ease-exit); }
+}
+@utility drawer-motion {
+  &[data-state="open"] { animation: sheet-in var(--duration-slow) var(--ease-enter); }
+  &[data-state="closed"] { animation: sheet-out var(--duration-base) var(--ease-exit); }
+  @media (width >= 40rem) {
+    &[data-state="open"] { animation: drawer-in var(--duration-slow) var(--ease-enter); }
+    &[data-state="closed"] { animation: drawer-out var(--duration-base) var(--ease-exit); }
+  }
+}
+
+/* ───────── Toasts: CSS spring in, faster out ───────── */
+@utility toast-motion {
+  transition:
+    opacity var(--duration-fast) var(--ease-standard),
+    translate 560ms var(--ease-spring),
+    scale 560ms var(--ease-spring);
+  @starting-style {
+    opacity: 0;
+    translate: 0 calc(16px * var(--motion-distance));
+    scale: 0.96;
+  }
+  &[data-leaving] {
+    opacity: 0;
+    scale: 0.97;
+    transition: opacity var(--duration-fast) var(--ease-exit), scale var(--duration-fast) var(--ease-exit);
+  }
+}
+
+/* ───────── Collapsing list rows (grid 0fr ↔ 1fr) ───────── */
+@utility collapse-row {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--duration-base) var(--ease-standard),
+    opacity var(--duration-base) var(--ease-standard);
+  @starting-style {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+  &[data-leaving] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-exit);
+  }
+  & > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+}
