@@ -93,6 +93,7 @@ All changes go through the owner:
 3. Validate: `claude plugin validate .`; typecheck any new pattern; run any changed kit script on a sample.
 4. Open a PR whose body is a table **change → evidence** (quote the signal), grouped by store, plus the metrics comparison. Tell the owner in one paragraph what will be different next project.
 5. Merge only after the owner approves.
+6. After the merge, refresh the account copy: run `node scripts/package-skills.mjs` in the skills repo and send the owner the zips from `dist/`, with one line: replace `design-director` and `design-council` in claude.ai → Settings → Capabilities → Skills. Until they do, other projects keep the previous version.
 
 If the skills repo can't be reached, write the full proposal and a patch to `<project>/.design/retro/proposal.md` and tell the owner where it is.
 
