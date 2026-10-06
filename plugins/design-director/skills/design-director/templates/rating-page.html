@@ -1,0 +1,164 @@
+<title>__TITLE__</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..700&display=swap">
+<style>
+/* Layout: a calm review desk — one column of specimens, each with its picture and three answers. */
+:root {
+  --bg: oklch(0.982 0.004 70); --surface: oklch(0.997 0.002 70); --surface-2: oklch(0.955 0.007 70);
+  --fg: oklch(0.2 0.012 60); --muted: oklch(0.47 0.012 60); --line: oklch(0.9 0.008 70); --line-strong: oklch(0.8 0.01 70);
+  --love: oklch(0.52 0.12 155); --love-soft: oklch(0.52 0.12 155 / 0.12);
+  --no: oklch(0.55 0.17 30); --no-soft: oklch(0.55 0.17 30 / 0.12);
+  --accent: oklch(0.8 0.09 78); --accent-fg: oklch(0.25 0.04 60);
+  --font: "Rubik", "Heebo", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: oklch(0.17 0.008 60); --surface: oklch(0.21 0.009 60); --surface-2: oklch(0.25 0.01 60);
+  --fg: oklch(0.95 0.004 70); --muted: oklch(0.76 0.01 70); --line: oklch(1 0 0 / 0.1); --line-strong: oklch(1 0 0 / 0.2);
+  --love: oklch(0.74 0.12 155); --love-soft: oklch(0.74 0.12 155 / 0.16); --no: oklch(0.74 0.14 30); --no-soft: oklch(0.74 0.14 30 / 0.16);
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: oklch(0.17 0.008 60); --surface: oklch(0.21 0.009 60); --surface-2: oklch(0.25 0.01 60);
+  --fg: oklch(0.95 0.004 70); --muted: oklch(0.76 0.01 70); --line: oklch(1 0 0 / 0.1); --line-strong: oklch(1 0 0 / 0.2);
+  --love: oklch(0.74 0.12 155); --love-soft: oklch(0.74 0.12 155 / 0.16); --no: oklch(0.74 0.14 30); --no-soft: oklch(0.74 0.14 30 / 0.16);
+  color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-size: 16px; line-height: 1.65; }
+.wrap { max-width: 860px; margin-inline: auto; padding-inline: 16px; padding-block: 32px 64px; display: grid; gap: 28px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; line-height: 1.25; }
+p { margin: 0; text-wrap: pretty; }
+header.top { display: grid; gap: 8px; }
+.eyebrow { display: inline-block; justify-self: start; background: var(--accent); color: var(--accent-fg); font-weight: 600; font-size: 0.8125rem; padding: 2px 10px; border-radius: 999px; }
+h1 { font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); font-weight: 700; }
+.lead { color: var(--muted); max-width: 62ch; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: color-mix(in oklch, var(--surface) 92%, transparent); backdrop-filter: blur(8px); font-size: 0.875rem; }
+.bar b { font-variant-numeric: tabular-nums; }
+.bar .note { margin-inline-start: auto; color: var(--muted); }
+.cat { font-size: 0.8125rem; font-weight: 600; color: var(--muted); margin-block: 12px -12px; }
+.item { border: 1px solid var(--line); background: var(--surface); border-radius: 14px; overflow: hidden; display: grid; }
+.item figure { margin: 0; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.item img { display: block; width: 100%; max-width: 100%; height: auto; max-height: 520px; object-fit: contain; object-position: top; }
+.item .body { padding: 16px 18px; display: grid; gap: 6px; }
+.item h3 { font-size: 1.125rem; font-weight: 600; }
+.item .desc { color: var(--muted); font-size: 0.9375rem; }
+.fb { padding: 0 18px 16px; display: grid; gap: 8px; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+button { font: inherit; color: inherit; }
+.fb button { border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 6px 14px; min-height: 40px; cursor: pointer; font-size: 0.875rem; transition: background 150ms, border-color 150ms, scale 100ms; }
+.fb button:active { scale: 0.96; }
+.fb button:focus-visible, textarea:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+.fb [data-v="love"][aria-pressed="true"] { background: var(--love-soft); border-color: var(--love); color: var(--love); font-weight: 600; }
+.fb [data-v="no"][aria-pressed="true"] { background: var(--no-soft); border-color: var(--no); color: var(--no); font-weight: 600; }
+.fb [data-note][aria-expanded="true"] { border-color: var(--fg); }
+.fb .saved { margin-inline-start: auto; font-size: 0.75rem; color: var(--muted); }
+textarea { width: 100%; min-height: 72px; resize: vertical; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--fg); padding: 8px 10px; font: inherit; font-size: 0.9375rem; unicode-bidi: plaintext; }
+.end { border: 1px dashed var(--line-strong); border-radius: 14px; padding: 18px; display: grid; gap: 6px; }
+.end p { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main class="wrap">
+  <header class="top">
+    <span class="eyebrow">רטרוספקטיבה</span>
+    <h1>__TITLE__</h1>
+    <p class="lead">__LEAD__</p>
+  </header>
+  <div class="bar" aria-live="polite"><span><b id="nRated">0</b>/<b id="nTotal">0</b> דורגו</span><span>· <b id="nLove">0</b> אהבתי</span><span>· <b id="nNo">0</b> לא בשבילי</span><span class="note" id="dbNote">מתחבר לשמירה…</span></div>
+  <div id="items"></div>
+  <section class="end">
+    <h2 style="font-size:1.125rem">כשסיימת</h2>
+    <p>כתוב בצ'אט "סיימתי". הדירוגים וההערות יעדכנו את פרופיל הטעם, את רשימת המלכודות ואת ספריית הרכיבים של הסקיל, ב-PR שתאשר.</p>
+  </section>
+</main>
+
+<script type="application/json" id="data">__ITEMS_JSON__</script>
+<script>
+(() => {
+  "use strict";
+  const ITEMS = JSON.parse(document.getElementById("data").textContent);
+  document.documentElement.lang = "he"; document.documentElement.dir = "rtl";
+  const FB = {}; let db = null;
+  const root = document.getElementById("items");
+
+  function render() {
+    root.innerHTML = "";
+    let lastCat = null;
+    ITEMS.forEach((it) => {
+      if (it.category && it.category !== lastCat) {
+        const c = document.createElement("h2"); c.className = "cat"; c.textContent = it.category; root.appendChild(c); lastCat = it.category;
+      }
+      const el = document.createElement("article"); el.className = "item"; el.id = "it-" + it.id;
+      if (it.image) {
+        const fig = document.createElement("figure"); const img = document.createElement("img");
+        img.src = it.image; img.alt = it.alt || it.title; img.loading = "lazy"; fig.appendChild(img); el.appendChild(fig);
+      }
+      const body = document.createElement("div"); body.className = "body";
+      const h = document.createElement("h3"); h.textContent = it.title; body.appendChild(h);
+      if (it.description) { const d = document.createElement("p"); d.className = "desc"; d.textContent = it.description; body.appendChild(d); }
+      el.appendChild(body);
+      const fb = document.createElement("div"); fb.className = "fb"; el.appendChild(fb);
+      renderFb(fb, it);
+      root.appendChild(el);
+    });
+    summary();
+  }
+
+  function renderFb(fb, it) {
+    const cur = FB[it.id] || {};
+    fb.innerHTML = "";
+    const row = document.createElement("div"); row.className = "row";
+    [["love", "אהבתי"], ["no", "לא בשבילי"]].forEach(([v, label]) => {
+      const b = document.createElement("button"); b.type = "button"; b.dataset.v = v; b.textContent = label;
+      b.setAttribute("aria-pressed", String(cur.verdict === v));
+      b.addEventListener("click", () => { FB[it.id] = { ...(FB[it.id] || {}), verdict: FB[it.id]?.verdict === v ? null : v }; save(it, fb); renderFb(fb, it); });
+      row.appendChild(b);
+    });
+    const nb = document.createElement("button"); nb.type = "button"; nb.dataset.note = ""; nb.textContent = "הערה";
+    const open = !!cur.note || fb.dataset.open === "1"; nb.setAttribute("aria-expanded", String(open)); row.appendChild(nb);
+    const st = document.createElement("span"); st.className = "saved"; st.textContent = fb.dataset.status || ""; row.appendChild(st);
+    fb.appendChild(row);
+    const ta = document.createElement("textarea"); ta.id = "note-" + it.id; ta.hidden = !open; ta.value = cur.note || "";
+    ta.placeholder = "מה לשנות? מה בדיוק אהבת?"; ta.setAttribute("aria-label", "הערה על " + it.title);
+    let t = 0;
+    const commit = () => { clearTimeout(t); const v = ta.value.trim(); if ((FB[it.id]?.note || "") === v) return; FB[it.id] = { ...(FB[it.id] || {}), note: v }; save(it, fb); };
+    ta.addEventListener("input", () => { clearTimeout(t); t = setTimeout(commit, 900); });
+    ta.addEventListener("blur", commit);
+    nb.addEventListener("click", () => { ta.hidden = !ta.hidden; fb.dataset.open = ta.hidden ? "" : "1"; nb.setAttribute("aria-expanded", String(!ta.hidden)); if (!ta.hidden) ta.focus(); });
+    fb.appendChild(ta);
+  }
+
+  const pending = {};
+  function save(it, fb) {
+    const f = FB[it.id] || {};
+    const body = { verdict: f.verdict || null, note: f.note || "", title: it.title, category: it.category || "", kind: it.kind || "", updatedAt: new Date().toISOString() };
+    fb.dataset.status = "שומר…";
+    const done = (s) => { fb.dataset.status = s; const el = fb.querySelector(".saved"); if (el) el.textContent = s; };
+    if (!db) { try { localStorage.setItem("retro-fb", JSON.stringify(FB)); } catch {} done("נשמר בדפדפן"); summary(); return; }
+    pending[it.id] = (pending[it.id] || Promise.resolve()).then(() => db.collection("feedback").doc(it.id).set(body)).then(() => done("נשמר"), () => done("השמירה נכשלה"));
+    summary();
+  }
+
+  function summary() {
+    const vals = ITEMS.map((i) => FB[i.id] || {});
+    document.getElementById("nTotal").textContent = ITEMS.length;
+    document.getElementById("nRated").textContent = vals.filter((v) => v.verdict).length;
+    document.getElementById("nLove").textContent = vals.filter((v) => v.verdict === "love").length;
+    document.getElementById("nNo").textContent = vals.filter((v) => v.verdict === "no").length;
+  }
+
+  async function connect() {
+    try { db = window.claude?.use ? await window.claude.use("db") : null; } catch { db = null; }
+    const note = document.getElementById("dbNote");
+    if (!db) {
+      try { Object.assign(FB, JSON.parse(localStorage.getItem("retro-fb") || "{}")); } catch {}
+      note.textContent = "השמירה המשותפת לא זמינה, אז המשוב נשמר רק בדפדפן הזה."; render(); return;
+    }
+    note.textContent = "המשוב נשמר אוטומטית.";
+    db.collection("feedback").onSnapshot((snap) => {
+      let changed = false;
+      snap.docs.forEach((d) => { const b = d.data() || {}; const p = FB[d.id] || {}; if (p.verdict !== (b.verdict || null) || (p.note || "") !== (b.note || "")) { FB[d.id] = { verdict: b.verdict || null, note: b.note || "" }; changed = true; } });
+      if (changed && !document.activeElement?.matches("textarea")) render(); else summary();
+    }, () => { note.textContent = "השמירה נכשלה. נסה לרענן."; });
+  }
+
+  render(); connect();
+})();
+</script>

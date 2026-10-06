@@ -56,6 +56,8 @@ The council judges evidence, not impressions. Read `references/dossier.md`, then
 - Read `.council/DIRECTION.md` and the decision log in `.council/decisions/` if they exist — the council builds on its past rulings.
 - Read `README`, `DESIGN.md`, `CLAUDE.md` and any brand material.
 - If the app runs and the design-director plugin is installed, capture screenshots with its `scripts/capture.mjs` (widths × themes × directions) and look at them. Screenshots are the strongest evidence of the current experience.
+- **Ask who the next milestone is for** if the dossier can't tell — the audience of a demo or launch (e.g. program coordinators vs. end users vs. donors) decides brand and flow questions. One direct question before a full convening is far cheaper than a ruling that gets overturned the next day (calibration C-001).
+- Read `learning/calibration.md`: lessons from how earlier rulings were received.
 - Decide the **stage** using `references/stages.md`. If the script's confidence is low or signals conflict, ask the user one short question to confirm it — the whole ruling depends on it.
 
 Write the dossier to `.council/dossier.md` (overwrite each convening) so members and later sessions see the same facts.
@@ -79,6 +81,9 @@ Then show the user a short summary in chat — the ruling, the three moves, the 
 
 ### 7. Hand off
 If accepted moves include design work, list them as tasks for the design-director skill (which phase, which screens, which constraints from this ruling). If design-director is installed, it reads `.council/DIRECTION.md` and follows accepted decisions.
+
+### 8. Learn
+When a ruling's outcome is known — accepted, changed by the owner, superseded, or proven right or wrong after the milestone — record it in `learning/calibration.md` (ruling log, and a lesson if it generalizes). The design-director retrospective does this for the whole project; do it yourself when the council is used on its own. Calibration changes go to the skills repo as a PR the owner approves, like every other skill change.
 
 ## Re-convening
 
@@ -106,3 +111,4 @@ If accepted moves include design work, list them as tasks for the design-directo
 | `references/decision-format.md` | Step 6 — numbering, statuses, DIRECTION.md upkeep |
 | `members/*.md` | Step 2 — the seated members' mandates and biases |
 | `templates/*.md` | Steps 3–6 — assessment, cross-examination, decision record, DIRECTION.md |
+| `learning/calibration.md` | Step 1 and the chair's ruling — lessons from past rulings; step 8 — log outcomes |

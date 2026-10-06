@@ -1,7 +1,7 @@
 {
   "name": "design-director",
-  "version": "0.2.1",
-  "description": "Art-direct and build distinctive UI for React/Next.js + Tailwind: audits, creative direction, design tokens, motion systems, modern CSS, creative/3D effects, full RTL/LTR support, and screenshot-based visual verification.",
+  "version": "0.3.0",
+  "description": "Personal, self-improving design director for React/Next.js + Tailwind: audits, creative direction, tokens, motion, RTL/LTR, screenshot verification, a pattern library and guardrail kit, and a retrospective that improves the skill after every project.",
   "author": {
     "name": "i-sh-sh"
   },
