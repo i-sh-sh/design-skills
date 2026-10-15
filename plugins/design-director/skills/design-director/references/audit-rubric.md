@@ -12,7 +12,7 @@ A "3" is the default output of any tool. The job is to move the important dimens
 
 | # | Dimension | What to look for | Common failure |
 |---|---|---|---|
-| 1 | **Hierarchy** | One obvious primary action/message per view; the squint test (blur your eyes — what survives?) | Everything the same weight; three competing CTAs |
+| 1 | **Hierarchy** | One obvious primary action/message per view; the squint test (blur your eyes — what survives?) | Everything the same weight; three competing CTAs; the same CTA twice at one eye level, e.g. header + hero on desktop (P-017) |
 | 2 | **Typography** | Deliberate pairing, a real scale (not 7 random sizes), comfortable measure (45–75ch Latin, ~40–65 for Hebrew), balanced/pretty wrapping, no orphans in headings | Default font, one weight, headings as big body text |
 | 3 | **Color** | Semantic roles, restrained accent use, both themes designed (not inverted), contrast passes | Accent everywhere; muddy dark mode; gray-on-gray text |
 | 4 | **Space & rhythm** | Consistent spacing scale, related things grouped (proximity), generous where it matters, aligned edges | Random paddings; cramped cards; nothing aligns to anything |

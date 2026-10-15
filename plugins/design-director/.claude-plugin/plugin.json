@@ -1,6 +1,6 @@
 {
   "name": "design-director",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Personal, self-improving design director for React/Next.js + Tailwind: audits, creative direction, tokens, motion, RTL/LTR, screenshot verification, a pattern library and guardrail kit, and a retrospective that improves the skill after every project.",
   "author": {
     "name": "i-sh-sh"

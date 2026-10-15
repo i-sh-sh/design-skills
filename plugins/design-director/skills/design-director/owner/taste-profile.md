@@ -40,14 +40,16 @@ When presenting 2–3 directions: one from each +2 family adapted to the project
 
 | Effect | Weight | Evidence |
 |---|---|---|
-| Kinetic headline (word rise with mask) | +2 | Lab loved |
-| Scroll-drawn line / chart | +2 | Lab loved |
+| Kinetic headline (word rise with mask) | +2 | Lab loved; shipped in MoshLab on request (2026-10) |
+| Scroll-drawn line / chart | +2 | Lab loved; shipped in MoshLab (bars and bridges draw on scroll) |
 | Number tickers | +2 | Lab loved; used in ProUnit community pulse |
 | Flowing variable-font weight | +2 | Lab loved |
 | Marquee with pause control | +2 | Lab loved |
 | Live shader background | 0 | Lab unrated |
 | Magnetic button | 0 | Lab unrated |
 | Spotlight cards | 0 | Lab unrated (toggled, then cleared) |
+| Scroll-driven reading progress / header settle | +1 | MoshLab: built on the owner's explicit motion request |
+| Cards that unfold on scroll (wave per column) | +1 | MoshLab: built on the owner's explicit motion request |
 
 ## Product micro-interactions (the default kit)
 
@@ -63,6 +65,17 @@ Every product micro-interaction shown so far was loved. Build these in unless th
 | Content-shaped skeleton | +2 | Lab loved; shipped in ProUnit |
 | Card-to-page morph (View Transitions) | +2 | Lab loved; shipped in ProUnit |
 
+## Physical gesture motion
+
+New in MoshLab (2026-10): the owner explicitly asked for an "extreme" upgrade of touch, swipe and animation. Starting weights are +1 from the explicit request; the MoshLab rating moves them.
+
+| Pattern | Weight | Evidence |
+|---|---|---|
+| Swipe deck (keep/skip with momentum and rubber-band) | +1 | MoshLab request; `patterns/gesture` |
+| Drag-to-dismiss bottom sheet | +1 | MoshLab request; `patterns/gesture/use-sheet-drag.ts` |
+| Pointer tilt + light on cards | +1 | MoshLab request; `patterns/gesture/use-tilt.ts` |
+| Phone snap rail with depth | +1 | MoshLab request |
+
 ## Summary
 
-Light over dark · clean over textured · warm-tactile or precise, never dramatic · motion that explains · polished micro-interactions everywhere · project brand first when one exists.
+Light over dark · clean over textured · warm-tactile or precise, never dramatic · motion that explains, and plenty of it when it has a body (gestures, scroll) · polished micro-interactions everywhere · project brand first when one exists.
