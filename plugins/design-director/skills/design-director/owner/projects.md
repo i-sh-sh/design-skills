@@ -28,7 +28,7 @@ One entry per project, newest first, written by the retrospective. The log is wh
 | Critique rounds | 2–3 per screen | 1–2 per change (390/1280 captures + browser run, no console errors) | ↓ |
 | Owner corrections | 0 design + 3 direction answers | 1 direction override (motion), 1 abandoned proposal (branding), 1 owner-chosen name | ≈ |
 | Patterns reused | 0 | 9 (segmented, stateful button, toasts, drawer, collapse rows, view transitions, ticker, plaintext inputs, skeleton) | ↑↑ |
-| Owner rating | lab 14/19 | pending (rating page 2026-10-15) | — |
+| Owner rating | lab 14/19 (74%) | 12/13 loved (92%), 0 rejected; the brand layer left unrated with a note (wants the real logo and font) | ↑ |
 
 **What worked**
 - The pattern library: nine patterns reused, and none of P-001…P-014 recurred.
@@ -41,7 +41,8 @@ One entry per project, newest first, written by the retrospective. The log is wh
 
 **Promoted after this project**
 - `cn()` with the type scale and `count()` → `patterns/utils.ts` (L4).
-- Gesture kit (`physics.ts`, sheet drag, tilt, scroll and kinetic CSS) → `patterns/gesture/`.
+- Gesture kit (`physics.ts`, swipe deck, sheet drag, tilt, scroll and kinetic CSS) → `patterns/gesture/`, all rated loved.
+- Kinetic headline and scroll-drawn line → +3 (loved in two projects).
 
 ---
 

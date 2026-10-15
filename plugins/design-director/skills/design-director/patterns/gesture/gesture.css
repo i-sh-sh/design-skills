@@ -205,13 +205,100 @@
   30%, 70% { scale: 1; opacity: 1; }
 }
 
+/* ───────── Swipe deck ───────── */
+.deck {
+  perspective: 1200px;
+}
+.deck-card {
+  /* Cards behind the top one wait lower and smaller, and rise as you drag (--lift). */
+  scale: calc(1 - var(--depth) * 0.05 + min(var(--depth), 1) * var(--lift) * 0.05);
+  translate: 0 calc((var(--depth) * 16px) - min(var(--depth), 1) * var(--lift) * 16px);
+  transition:
+    scale 520ms var(--ease-spring),
+    translate 520ms var(--ease-spring),
+    filter var(--duration-slow) var(--ease-standard);
+  filter: brightness(calc(1 - var(--depth) * 0.03));
+  transform-origin: 50% 100%;
+}
+.deck-card:not(.deck-top) {
+  pointer-events: none;
+}
+.deck-top {
+  transition: none;
+  cursor: grab;
+  touch-action: pan-y;
+  will-change: translate, rotate;
+  /* Arrives by popping up from the pile */
+  animation: deck-arrive 420ms var(--ease-spring) both;
+}
+.deck-top:active {
+  cursor: grabbing;
+}
+/* First visit: the top card leans right then left once, to show it moves */
+.deck-hint .deck-top > article {
+  animation: deck-nudge 1300ms var(--ease-standard) 700ms both;
+}
+@keyframes deck-nudge {
+  30% { translate: 36px 0; rotate: 3deg; }
+  62% { translate: -24px 0; rotate: -2deg; }
+}
+@keyframes deck-arrive {
+  from { scale: 0.95; }
+}
+.deck-stamp {
+  position: absolute;
+  inset-block-start: 1.25rem;
+  z-index: 2;
+  padding: 0.25rem 0.75rem;
+  border: 3px solid currentColor;
+  font-size: 1.375rem;
+  font-weight: 800;
+  pointer-events: none;
+  background: color-mix(in oklch, var(--card), transparent 10%);
+}
+/* Physical sides: the stamp appears on the side you're throwing away from */
+.deck-stamp-keep {
+  color: var(--primary);
+  opacity: var(--keep, 0);
+  rotate: -10deg;
+  scale: calc(0.8 + var(--keep, 0) * 0.2);
+}
+.deck-stamp-skip {
+  color: var(--muted-foreground);
+  opacity: var(--skip, 0);
+  rotate: 10deg;
+  scale: calc(0.8 + var(--skip, 0) * 0.2);
+}
+.deck-stamp-keep { left: 1.25rem; } /* logical-ok: physical, follows the gesture */
+.deck-stamp-skip { right: 1.25rem; } /* logical-ok: physical, follows the gesture */
+.deck-top > article {
+  box-shadow: 0 2px 4px hsl(var(--shadow-color) / 0.05), 0 calc(18px + var(--keep, 0) * 20px + var(--skip, 0) * 20px) 40px -10px hsl(var(--shadow-color) / 0.25);
+}
+.deck-btn {
+  transition: scale 380ms var(--ease-spring), background-color var(--duration-fast);
+}
+.deck-btn:active {
+  scale: 0.88;
+}
+.deck-done {
+  animation: rise-in var(--duration-deliberate) var(--ease-spring) both;
+}
+.deck-kept {
+  animation: rise-in var(--duration-slow) var(--ease-enter) calc(200ms + var(--i, 0) * 60ms) both;
+}
+
+
 /* ───────── Reduced motion: keep state, drop travel ───────── */
 @media (prefers-reduced-motion: reduce) {
   .kinetic-word > span,
   .reveal-card,
   .scroll-bar,
   .scroll-bridges .bridge-link,
-  .snap-rail > * {
+  .snap-rail > *,
+  .deck-top,
+  .deck-hint .deck-top > article,
+  .deck-done,
+  .deck-kept {
     animation: none !important;
   }
   .tilt-surface {
@@ -219,5 +306,8 @@
   }
   .tilt:active .tilt-surface {
     scale: 1;
+  }
+  .deck-card {
+    transition: none;
   }
 }
