@@ -13,7 +13,7 @@ Seat 4–7 members for the question. Always the devil's advocate; always the inc
 4. **Reversibility under uncertainty.** When evidence is thin or split, prefer the option that is cheap to undo and teaches the most.
 5. **Discount known biases.** Each member file lists a bias. When a member's position matches their bias and nothing else supports it, give it less weight.
 6. **Arguments, not votes.** Count positions only to report them; decide on the strength of arguments.
-7. **Owner taste as tie-breaker only.** If the owner's taste profile exists (e.g. design-director's `owner/taste-profile.md`), use it only to break a genuine tie between options that are otherwise equal on evidence and stage fit. Never let it override the brief or the evidence.
+7. **Owner taste as tie-breaker only, but never silently against it.** If the owner's taste profile exists (e.g. design-director's `owner/taste-profile.md`), use it only to break a genuine tie between options that are otherwise equal on evidence and stage fit. Never let it override the brief or the evidence. When the ruling puts something the owner rates +2 on the not-now list, say so in the summary as an explicit choice for the owner ("the council says not now; your profile says you love it: your call"), and offer it as a scoped option instead of a flat rejection (calibration C-006).
 8. **Calibrate with history.** Read `learning/calibration.md` before ruling: how past rulings were received, which kinds of dissent were later vindicated, and the owner's decision patterns. Use it to sharpen the question and the options you put forward — never to skip the deliberation or to pre-empt the evidence of this project.
 
 ## Output

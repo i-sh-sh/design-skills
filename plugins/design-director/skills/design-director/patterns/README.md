@@ -32,6 +32,14 @@ Add `@import "../styles/patterns.css";` to `globals.css` after the motion tokens
 | `page-transition.tsx` | Directional route transitions + card→page morph via React `<ViewTransition>` (Next 16) | product | +2 | `.nav-forward/.nav-back/.morph` CSS |
 | `number-ticker.tsx` | Counts up once, tabular digits, final value at rest and under reduced motion | both | +2 | — |
 | `patterns.css` | The utilities above + `collapse-row` (grid 0fr↔1fr add/remove rows) | — | +2 | motion tokens |
+| `utils.ts` | `cn()` that knows the template's type scale (P-016) and `count()` for Hebrew counts (P-015) | — | — | `tailwind-merge` |
+| `gesture/physics.ts` | Dependency-free gesture physics: interruptible spring, velocity tracker, momentum projection, rubber-band, Android haptic tick, `useReducedMotion()` | product | +2 | — |
+| `gesture/swipe-deck.tsx` | Generic keep/skip deck: `items`, `renderCard`, `renderDone`, `labels`; momentum flick, grab-point tilt, undo, ← → and Backspace, announced verdicts | product | +2 | `physics.ts`, `ui/button`, `.deck*` CSS |
+| `gesture/use-sheet-drag.ts` | Drag-to-dismiss for the bottom sheet in `drawer.tsx`: rubber-band up, momentum down, backdrop fades with the drag | product | +2 | `physics.ts`, `.sheet-grab` CSS |
+| `gesture/use-tilt.ts` | Pointer-follow card tilt + light (mouse/pen); press-in on touch; writes 4 CSS variables per frame | both | +2 | `.tilt` CSS |
+| `gesture/gesture.css` | Scroll-driven header settle + reading-progress thread, kinetic headline (masked, LCP-safe), cards that unfold on scroll, scroll-drawn bars, phone snap rail with depth, tilt and sheet-grab styles; all behind `@supports` and off under reduced motion | both | +3 (kinetic headline, scroll-drawn line), +2 (scroll reveals) | motion tokens |
+
+Gesture kit: copy `gesture/*.ts` to `src/lib/` and `gesture.css` to `src/styles/`, import it after `patterns.css`. The signature is "touch carries velocity, scroll drives scroll effects": nothing runs on a timer. Every gesture keeps a button and a key path.
 
 Card→page morph: wrap the card and the destination header in `<ViewTransition name={\`item-${id}\`} share="morph" default="none">`, and tag links with `transitionTypes={["nav-forward"]}` / `["nav-back"]`; wrap each page in `<PageTransition>`. Anchor fixed chrome with `style={{ viewTransitionName: "site-header" }}` (or `bottom-nav`).
 

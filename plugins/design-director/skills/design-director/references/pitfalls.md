@@ -33,6 +33,10 @@ Every mistake the skill has made (or nearly made) in a real project, and how far
 | P-012 | Lists without a cap on dense dashboards | One column twice as long as its neighbor | L1 | — (cap at ~6 + "ועוד N") | ProUnit |
 | P-013 | Framework assumptions from memory on a new major version (Next 16) | Wrong APIs | L2 | SKILL.md phase 1: read the framework's bundled docs / AGENTS.md | ProUnit |
 | P-014 | `setState` inside an effect for animation counters (React 19 lint) | Lint error; cascading renders | **L4** | `patterns/number-ticker.tsx` writes to the DOM node | ProUnit |
+| P-015 | Numeral + plural noun in Hebrew for n = 1 ("1 תפקידים פתוחים") | Broken Hebrew on cards and dashboards; a screen reader reads it aloud as written | **L2 + L4** | `references/bidi.md` §5; `count()` in `patterns/utils.ts` | MoshLab |
+| P-016 | `cn()` (tailwind-merge) treats the custom type scale (`text-label`, `text-h3`…) as a color and drops it next to `text-muted-foreground` | Tags and labels silently render at body size | **L4** | `patterns/utils.ts` extends tailwind-merge with the template's font sizes | MoshLab |
+| P-017 | The same primary CTA twice at one eye level (header button + hero button on desktop) | Attention split; the squint test shows two primaries | L2 | `references/audit-rubric.md` dimension 1 | MoshLab |
+| P-018 | Two parallel threads numbering council decisions from the same base (branding and motion were both "0004") | Two different decisions with one number; links break after merge | L2 | design-council `references/decision-format.md` (numbering) | MoshLab |
 
 ## Adding an entry
 

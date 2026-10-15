@@ -1,0 +1,313 @@
+/*
+ * Gesture and scroll motion — extracted from MoshLab (2026-10, "motion with a body").
+ *
+ * Signature: "motion with a body". Things you touch carry your hand's speed
+ * and weight (springs, momentum, rubber-banding); things you scroll past are
+ * tied to the scroll itself, so they run at your pace and stop when you stop.
+ *
+ * Progressive enhancement throughout: without scroll-driven animations
+ * (Firefox stable, Oct 2026) content is simply there. Reduced motion removes
+ * every movement at the end of this file and keeps colour/opacity feedback.
+ */
+
+/* ───────── Scroll progress + header that settles on scroll ───────── */
+@supports (animation-timeline: scroll()) {
+  .scroll-header {
+    animation: header-settle linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 96px;
+  }
+  /* An accent-colored thread along the bottom of the header fills as you read */
+  .scroll-header::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: -1px;
+    block-size: 3px;
+    background: var(--accent);
+    transform-origin: left;
+    scale: 0 1;
+    animation: progress-fill linear both;
+    animation-timeline: scroll(root block);
+  }
+  [dir="rtl"] .scroll-header::after {
+    transform-origin: right; /* logical-ok: transform-origin has no logical keyword */
+  }
+}
+@keyframes header-settle {
+  to { box-shadow: 0 8px 24px -12px hsl(var(--shadow-color) / 0.25); }
+}
+@keyframes progress-fill {
+  to { scale: 1 1; }
+}
+
+/* ───────── Kinetic headline: words rise through a mask ─────────
+ * Masked translate only, no opacity, so the LCP text paints immediately. */
+.kinetic-word {
+  display: inline-block;
+  overflow: clip;
+  /* Room for Hebrew descenders (ק ך ף) inside the mask */
+  padding-block: 0.14em;
+  margin-block: -0.14em;
+}
+.kinetic-word > span {
+  display: inline-block;
+  animation: word-rise 900ms var(--ease-expo) calc(80ms + var(--i, 0) * 90ms) both;
+}
+@keyframes word-rise {
+  from { translate: 0 115%; }
+}
+
+/* ───────── Card tilt + light (pointer) / press-in (touch) ───────── */
+.tilt {
+  perspective: 900px;
+  -webkit-tap-highlight-color: transparent;
+}
+.tilt-surface {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition:
+    transform 700ms var(--ease-spring),
+    scale 380ms var(--ease-spring),
+    box-shadow var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard);
+}
+.tilt[data-tilting] .tilt-surface {
+  transition-duration: 120ms, 380ms, var(--duration-base), var(--duration-base);
+  transition-timing-function: var(--ease-standard);
+}
+/* The light: a whisper of the accent color under the pointer */
+.tilt-surface {
+  isolation: isolate;
+}
+/* Behind the content (z-index -1 inside the isolated card), above its fill */
+.tilt-surface::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(24rem circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklch, var(--accent) 16%, transparent), transparent 65%);
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+.tilt[data-tilting] .tilt-surface::before {
+  opacity: 1;
+}
+.tilt:active .tilt-surface {
+  scale: 0.975;
+  transition-duration: 700ms, 90ms, var(--duration-base), var(--duration-base);
+}
+
+/* ───────── Cards rise and unfold as they scroll into view ─────────
+ * Columns land a beat apart (--col), so a row reads as a wave. */
+@supports (animation-timeline: view()) {
+  .reveal-card {
+    animation: card-unfold linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--col, 0) * 6%) entry calc(70% + var(--col, 0) * 10%);
+    transform-origin: 50% 100%;
+  }
+}
+@keyframes card-unfold {
+  from {
+    opacity: 0;
+    translate: 0 56px;
+    rotate: x 14deg;
+    scale: 0.94;
+  }
+}
+
+/* ───────── Bottom sheet grab zone ───────── */
+@media (width < 40rem) {
+  .sheet-grab {
+    position: relative;
+    touch-action: none;
+    cursor: grab;
+  }
+  .sheet-grab::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 0.6rem;
+    inset-inline-start: 50%;
+    translate: calc(-50% * var(--dir-sign)) 0;
+    inline-size: 2.75rem;
+    block-size: 5px;
+    border-radius: 999px;
+    background: var(--input);
+    transition: background-color var(--duration-fast), inline-size 380ms var(--ease-spring);
+  }
+  [data-dragging] .sheet-grab::before {
+    background: var(--muted-foreground);
+    inline-size: 3.5rem;
+  }
+}
+[data-dragging] {
+  user-select: none;
+}
+/* Dragged off by hand: Radix must not replay its own exit from the top */
+.drawer-motion[data-dragged-out][data-state="closed"] {
+  animation: none !important;
+}
+
+/* ───────── Scroll-linked data: bars grow, bridges draw ───────── */
+@supports (animation-timeline: view()) {
+  .scroll-bar {
+    transform-origin: left;
+    animation: bar-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 45%;
+  }
+  [dir="rtl"] .scroll-bar {
+    transform-origin: right; /* logical-ok: transform-origin has no logical keyword */
+  }
+  .scroll-bridges .bridge-link {
+    transform-origin: left;
+    animation: bar-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 30% cover 40%;
+  }
+  [dir="rtl"] .scroll-bridges .bridge-link {
+    transform-origin: right; /* logical-ok: transform-origin has no logical keyword */
+  }
+}
+@keyframes bar-grow {
+  from { scale: 0 1; }
+}
+
+/* ───────── Snap rail: horizontal carousel on phones, depth from scroll ───────── */
+@media (width < 40rem) {
+  .snap-rail {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: inline mandatory;
+    overscroll-behavior-inline: contain;
+    margin-inline: -1rem;
+    padding-inline: 9%; /* the first and last cards can reach the centre */
+    padding-block: 0.5rem;
+    scrollbar-width: none;
+  }
+  .snap-rail > * {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+  }
+  @supports (animation-timeline: view()) {
+    .snap-rail > * {
+      animation: rail-depth linear both;
+      animation-timeline: view(inline);
+    }
+  }
+}
+@keyframes rail-depth {
+  0%, 100% { scale: 0.9; opacity: 0.7; }
+  30%, 70% { scale: 1; opacity: 1; }
+}
+
+/* ───────── Swipe deck ───────── */
+.deck {
+  perspective: 1200px;
+}
+.deck-card {
+  /* Cards behind the top one wait lower and smaller, and rise as you drag (--lift). */
+  scale: calc(1 - var(--depth) * 0.05 + min(var(--depth), 1) * var(--lift) * 0.05);
+  translate: 0 calc((var(--depth) * 16px) - min(var(--depth), 1) * var(--lift) * 16px);
+  transition:
+    scale 520ms var(--ease-spring),
+    translate 520ms var(--ease-spring),
+    filter var(--duration-slow) var(--ease-standard);
+  filter: brightness(calc(1 - var(--depth) * 0.03));
+  transform-origin: 50% 100%;
+}
+.deck-card:not(.deck-top) {
+  pointer-events: none;
+}
+.deck-top {
+  transition: none;
+  cursor: grab;
+  touch-action: pan-y;
+  will-change: translate, rotate;
+  /* Arrives by popping up from the pile */
+  animation: deck-arrive 420ms var(--ease-spring) both;
+}
+.deck-top:active {
+  cursor: grabbing;
+}
+/* First visit: the top card leans right then left once, to show it moves */
+.deck-hint .deck-top > article {
+  animation: deck-nudge 1300ms var(--ease-standard) 700ms both;
+}
+@keyframes deck-nudge {
+  30% { translate: 36px 0; rotate: 3deg; }
+  62% { translate: -24px 0; rotate: -2deg; }
+}
+@keyframes deck-arrive {
+  from { scale: 0.95; }
+}
+.deck-stamp {
+  position: absolute;
+  inset-block-start: 1.25rem;
+  z-index: 2;
+  padding: 0.25rem 0.75rem;
+  border: 3px solid currentColor;
+  font-size: 1.375rem;
+  font-weight: 800;
+  pointer-events: none;
+  background: color-mix(in oklch, var(--card), transparent 10%);
+}
+/* Physical sides: the stamp appears on the side you're throwing away from */
+.deck-stamp-keep {
+  color: var(--primary);
+  opacity: var(--keep, 0);
+  rotate: -10deg;
+  scale: calc(0.8 + var(--keep, 0) * 0.2);
+}
+.deck-stamp-skip {
+  color: var(--muted-foreground);
+  opacity: var(--skip, 0);
+  rotate: 10deg;
+  scale: calc(0.8 + var(--skip, 0) * 0.2);
+}
+.deck-stamp-keep { left: 1.25rem; } /* logical-ok: physical, follows the gesture */
+.deck-stamp-skip { right: 1.25rem; } /* logical-ok: physical, follows the gesture */
+.deck-top > article {
+  box-shadow: 0 2px 4px hsl(var(--shadow-color) / 0.05), 0 calc(18px + var(--keep, 0) * 20px + var(--skip, 0) * 20px) 40px -10px hsl(var(--shadow-color) / 0.25);
+}
+.deck-btn {
+  transition: scale 380ms var(--ease-spring), background-color var(--duration-fast);
+}
+.deck-btn:active {
+  scale: 0.88;
+}
+.deck-done {
+  animation: rise-in var(--duration-deliberate) var(--ease-spring) both;
+}
+.deck-kept {
+  animation: rise-in var(--duration-slow) var(--ease-enter) calc(200ms + var(--i, 0) * 60ms) both;
+}
+
+
+/* ───────── Reduced motion: keep state, drop travel ───────── */
+@media (prefers-reduced-motion: reduce) {
+  .kinetic-word > span,
+  .reveal-card,
+  .scroll-bar,
+  .scroll-bridges .bridge-link,
+  .snap-rail > *,
+  .deck-top,
+  .deck-hint .deck-top > article,
+  .deck-done,
+  .deck-kept {
+    animation: none !important;
+  }
+  .tilt-surface {
+    transform: none !important;
+  }
+  .tilt:active .tilt-surface {
+    scale: 1;
+  }
+  .deck-card {
+    transition: none;
+  }
+}

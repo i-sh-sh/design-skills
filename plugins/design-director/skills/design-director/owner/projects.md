@@ -15,6 +15,37 @@ One entry per project, newest first, written by the retrospective. The log is wh
 
 ---
 
+## MoshLab (ProUnit, continued) — 2026-10-06 → 2026-10-15
+
+**What:** the same Moshal community-projects demo after a provisional Moshal brand layer (sampled from moshalprogram.org.il, no logo or licensed font copied), council 0003 polish, the "motion with a body" upgrade (0004), the rename to **MoshLab · Where Ideas Become Projects**, and the PM spec's profile, problem/vision, join expectations and alumni-mentor features. PRs #4, #5, #7, #8 merged.
+**Direction:** 0003 (polish inside the brand; the bridge between institutions as the one delight) accepted, then partly superseded a day later by the owner's motion request (0004, accepted 2026-10-15).
+
+**Metrics (vs. ProUnit baseline)**
+| Metric | ProUnit | MoshLab | Trend |
+|---|---|---|---|
+| First-pass issues | 6 | 4 in the 0003 critique (Hebrew counts ×3 screens, duplicate CTA, `cn()` dropping type sizes, weak join moment) | ↓ |
+| Caught by checks / by eye | 1 / 5 | 0 / 4 (contrast, bidi lint and the input rule all passed: last retro's L3 promotions held) | checks found nothing new to catch; new pitfalls promoted to L4 |
+| Critique rounds | 2–3 per screen | 1–2 per change (390/1280 captures + browser run, no console errors) | ↓ |
+| Owner corrections | 0 design + 3 direction answers | 1 direction override (motion), 1 abandoned proposal (branding), 1 owner-chosen name | ≈ |
+| Patterns reused | 0 | 9 (segmented, stateful button, toasts, drawer, collapse rows, view transitions, ticker, plaintext inputs, skeleton) | ↑↑ |
+| Owner rating | lab 14/19 (74%) | 12/13 loved (92%), 0 rejected; the brand layer left unrated with a note (wants the real logo and font) | ↑ |
+
+**What worked**
+- The pattern library: nine patterns reused, and none of P-001…P-014 recurred.
+- Showing the built result in the same PR as the decision: 0003 was accepted with one word.
+- Using an existing capture of the brand site instead of fighting the network policy.
+
+**What had to be fixed**
+- P-015…P-018 (Hebrew counts, `cn()` type sizes, duplicate CTA, decision-number collision).
+- The council ruled out motion the owner loves (+2) as "not now"; the owner reversed it the next day (council C-006).
+
+**Promoted after this project**
+- `cn()` with the type scale and `count()` → `patterns/utils.ts` (L4).
+- Gesture kit (`physics.ts`, swipe deck, sheet drag, tilt, scroll and kinetic CSS) → `patterns/gesture/`, all rated loved.
+- Kinetic headline and scroll-drawn line → +3 (loved in two projects).
+
+---
+
 ## ProUnit — 2026-09-29 → 2026-10-06
 
 **What:** Hebrew-only RTL demo for Moshal program students (propose recruiting projects, join across degrees and institutions) and coordinators (community-day "community pulse"). Next.js 16, React 19, Tailwind v4, Radix. Deployed on Vercel.

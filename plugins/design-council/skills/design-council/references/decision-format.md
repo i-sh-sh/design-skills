@@ -14,7 +14,8 @@ The council's memory lives in the project, in git, so every later session — an
     └── ...
 ```
 
-- Numbering: four digits, next free number; slug in English kebab-case (file names stay ASCII even when content is Hebrew).
+- Numbering: four digits, next free number; slug in English kebab-case (file names stay ASCII even when content is Hebrew). "Next free" counts numbers already claimed in open PRs and other branches, not just the default branch: two threads once both wrote a "0004" (calibration C-008). If a collision slips through, renumber the one that merges second.
+- **Owner-request decisions.** When the owner asks directly for something that changes an accepted decision (no convening), still record it as a decision: mode "owner request", the owner's words quoted, and exactly which clauses of which decision it supersedes. Keep the rest of the old decision in force.
 - One decision per file. Never edit an accepted decision's ruling; supersede it with a new one.
 
 ## Statuses
@@ -25,6 +26,7 @@ The council's memory lives in the project, in git, so every later session — an
 | `accepted` | The user accepted (possibly with changes, recorded in the file) |
 | `rejected` | The user declined; keep the file — the reasoning is still useful |
 | `superseded by NNNN` | A later decision replaced it |
+| `parked` | The owner moved on without deciding; keep it, and say in its PR that it is parked |
 
 ## DIRECTION.md upkeep
 

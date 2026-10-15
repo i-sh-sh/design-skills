@@ -77,7 +77,7 @@ The chair decides using the rules in `members/chair.md`: evidence over assertion
 ### 6. Record
 Write the decision with `templates/decision.md` to `.council/decisions/NNNN-short-slug.md` (next number, status `proposed`), and create or update `.council/DIRECTION.md` from `templates/DIRECTION.md`. Details: `references/decision-format.md`.
 
-Then show the user a short summary in chat — the ruling, the three moves, the not-now list, the dissent — and ask whether to accept it. On acceptance, set the status to `accepted` and update `DIRECTION.md`. If the user overrides the council, record their decision as the ruling and keep the council's view under dissent: the user always has the final say.
+Then show the user a short summary in chat — the ruling, the three moves, the not-now list, the dissent — and ask whether to accept it. If the not-now list postpones anything the owner's taste profile rates +2, name it and let the owner choose (C-006). When the moves are cheap, build them in the same PR and ask for acceptance with screenshots: this owner decides on the built thing (C-009). On acceptance, set the status to `accepted` and update `DIRECTION.md`. If the user overrides the council, record their decision as the ruling and keep the council's view under dissent: the user always has the final say.
 
 ### 7. Hand off
 If accepted moves include design work, list them as tasks for the design-director skill (which phase, which screens, which constraints from this ruling). If design-director is installed, it reads `.council/DIRECTION.md` and follows accepted decisions.

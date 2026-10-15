@@ -95,6 +95,8 @@ All changes go through the owner:
 5. Merge only after the owner approves.
 6. After the merge, refresh the account copy: run `node scripts/package-skills.mjs` in the skills repo and send the owner the zips from `dist/`, with one line: replace `design-director` and `design-council` in claude.ai → Settings → Capabilities → Skills. Until they do, other projects keep the previous version.
 
+A skill-proposal card (`propose_skills`, e.g. in Claude Projects) replaces only `SKILL.md`, not `owner/`, `references/`, `patterns/` or `learning/`. Use it only when a retro changes nothing but `SKILL.md`; otherwise the zips are the way to update the account copy, or the supporting files stay stale.
+
 If the skills repo can't be reached, write the full proposal and a patch to `<project>/.design/retro/proposal.md` and tell the owner where it is.
 
 ## 8. Step 6 — Measure the trend

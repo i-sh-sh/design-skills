@@ -40,14 +40,16 @@ When presenting 2–3 directions: one from each +2 family adapted to the project
 
 | Effect | Weight | Evidence |
 |---|---|---|
-| Kinetic headline (word rise with mask) | +2 | Lab loved |
-| Scroll-drawn line / chart | +2 | Lab loved |
+| Kinetic headline (word rise with mask) | **+3** | Lab loved; MoshLab retro loved (2026-10-15) |
+| Scroll-drawn line / chart | **+3** | Lab loved; MoshLab retro loved (bars and bridges draw on scroll) |
 | Number tickers | +2 | Lab loved; used in ProUnit community pulse |
 | Flowing variable-font weight | +2 | Lab loved |
 | Marquee with pause control | +2 | Lab loved |
 | Live shader background | 0 | Lab unrated |
 | Magnetic button | 0 | Lab unrated |
 | Spotlight cards | 0 | Lab unrated (toggled, then cleared) |
+| Scroll-driven reading progress / header settle | +2 | MoshLab: explicit request; retro loved ("scroll effects") |
+| Cards that unfold on scroll (wave per column) | +2 | MoshLab: explicit request; retro loved |
 
 ## Product micro-interactions (the default kit)
 
@@ -63,6 +65,24 @@ Every product micro-interaction shown so far was loved. Build these in unless th
 | Content-shaped skeleton | +2 | Lab loved; shipped in ProUnit |
 | Card-to-page morph (View Transitions) | +2 | Lab loved; shipped in ProUnit |
 
+## Physical gesture motion
+
+New in MoshLab (2026-10): the owner explicitly asked for an "extreme" upgrade of touch, swipe and animation, then rated every gesture pattern "loved" in the retro. Ready code: `patterns/gesture/`.
+
+| Pattern | Weight | Evidence |
+|---|---|---|
+| Swipe deck (keep/skip with momentum and rubber-band), with a summary of what was kept | +2 | MoshLab request + retro loved (deck and its summary) |
+| Drag-to-dismiss bottom sheet | +2 | MoshLab request + retro loved |
+| Pointer tilt + light on cards | +2 | MoshLab request + retro loved |
+| Phone snap rail with depth | +1 | MoshLab request (not rated) |
+
+## Concept & delight
+
+| Preference | Weight | Evidence |
+|---|---|---|
+| **A signature element that is the product's idea made visible** (MoshLab: the bridge between institutions, which sparks on hover and gains a pending link after a join request), instead of generic delight | +2 | MoshLab retro: both bridge items loved; confetti was never wanted |
+| Product screens that state the project's structure plainly (problem / vision side by side, team with skills and hours, expectations before joining) | +1 | MoshLab retro: all five screens loved |
+
 ## Summary
 
-Light over dark · clean over textured · warm-tactile or precise, never dramatic · motion that explains · polished micro-interactions everywhere · project brand first when one exists.
+Light over dark · clean over textured · warm-tactile or precise, never dramatic · motion that explains, and plenty of it when it has a body (gestures, scroll) · polished micro-interactions everywhere · project brand first when one exists.

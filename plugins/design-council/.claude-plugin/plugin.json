@@ -1,6 +1,6 @@
 {
   "name": "design-council",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A council of design experts that examines a project's current state and decides its design & experience direction: what fits this stage, the next three moves, and what not to do now. Decisions are recorded in the repo.",
   "author": {
     "name": "i-sh-sh"

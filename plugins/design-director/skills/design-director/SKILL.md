@@ -68,7 +68,7 @@ Read `references/motion.md`. Decide the motion signature for this project (one s
 ### 5. Build
 
 - Build real, running code — not descriptions of code. Prefer editing the project's existing components over adding parallel ones.
-- **Patterns first.** Before writing a component, check `patterns/` — the owner's loved micro-interactions (segmented indicator, stateful button, CSS-spring toasts, drawer/sheet, collapsing rows, view-transition morph and directional navigation, number ticker) and a bidi-safe base UI kit are there, already fixed for the pitfalls that hurt earlier projects. Copy, then adapt to the project's tokens and copy.
+- **Patterns first.** Before writing a component, check `patterns/` — the owner's loved micro-interactions (segmented indicator, stateful button, CSS-spring toasts, drawer/sheet, collapsing rows, view-transition morph and directional navigation, number ticker, and the gesture kit: spring/momentum physics, drag-to-dismiss sheet, card tilt, scroll-driven reveals and kinetic headline) and a bidi-safe base UI kit are there, already fixed for the pitfalls that hurt earlier projects. Copy, then adapt to the project's tokens and copy.
 - Every interactive element gets the full state set: default, hover, focus-visible, active/pressed, disabled, loading; every data view gets empty, loading, error.
 - Use logical properties everywhere (see *Bidirectional by default*).
 - Showcase effects: pick from `references/creative-tech.md`, respecting its cost/impact notes. Consult `references/modern-css.md` for platform features and their fallbacks.
@@ -93,7 +93,7 @@ When a milestone lands (PR merged, production deploy, the owner says it's done),
 1. Gather facts (`scripts/retro.mjs`) and read the session for signals — corrections, rejections, approvals, bugs and how they were caught.
 2. Build a rating page of what was made (`scripts/build-rating-page.mjs`), publish it, and read the owner's ratings.
 3. Turn it into concrete changes: taste weights, working-style notes, pitfalls (promote up the ladder — rule → check → component), new patterns, council calibration, and a project-log entry with metrics.
-4. Propose everything as a PR to the skills repo. **The owner approves; never merge it yourself.**
+4. Propose everything as a PR to the skills repo. **The owner approves; never merge it yourself.** After the merge, refresh the account copy with the packaged zips; a skill-proposal card alone carries only `SKILL.md`.
 
 ## Bidirectional by default
 
